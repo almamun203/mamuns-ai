@@ -1,4 +1,5 @@
 import { useState ,useEffect} from "react";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -15,7 +16,7 @@ const Navbar = () => {
 
     const handleToggle=(e)=>{
        if(e.target.checked){
-        setTheme('synthwave')
+        setTheme('dark')
        }else{
         setTheme('light')
        }
@@ -24,13 +25,13 @@ const Navbar = () => {
         <div>
             <div className="navbar bg-base-100 shadow-lg px-4 fixed  z-10">
   <div className="flex-1">
-    <a className="btn btn-ghost text-2xl  text-secondary normal-case gap-0">Byte<span className="text-primary">Blaze</span></a>
+    <Link to='/' className="btn btn-ghost text-2xl  text-secondary normal-case gap-0">Byte<span className="text-primary">Blaze</span></Link>
   </div>
   <div className="flex-none">
-    <ul className="menu menu-horizontal px-1">
-      <li className="font-bold"><a>Home</a></li>
-      <li className="font-bold text-primary"><a>Blogs</a></li>
-      <li className="font-bold"><a>Bookmarks</a></li>
+    <ul className="menu menu-horizontal px-1 gap-4">
+      <Link to='/' className="font-bold"><a>Home</a></Link>
+      <Link to='/blogs' className="font-bold text-primary"><a>Blogs</a></Link>
+      <Link to='/bookmarks' className="font-bold"><a>Bookmarks</a></Link>
 
       
         
