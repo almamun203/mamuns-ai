@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useLoaderData,  } from "react-router-dom";
+import { MdBookmarkAdd } from "react-icons/md";
+import { saveBlog } from "../Utils";
 
 
 const Blog = () => {
   const [tabIndex,setTabIndex]=useState(0)
-
+  
 
     const blog=useLoaderData();
-    const {title,comments_count,public_reactions_count,reading_time_minutes,published_at,tags}=blog;
+    const {title,comments_count,public_reactions_count,reading_time_minutes,published_at}=blog;
+	
+const handleBookmark=blog=>{
+	saveBlog(blog)
+}
+
     return (
         <div className="max-w-3xl px-6 py-16 mx-auto space-y-12">
 	<article className="space-y-8 dark:bg-gray-100 dark:text-gray-900">
@@ -18,7 +25,7 @@ const Blog = () => {
 					
 					<p className="text-sm">{reading_time_minutes} min read• {new Date(published_at).toLocaleDateString()}</p>
 				
-				<p className="flex-shrink-0 mt-3 text-sm md:mt-0">{comments_count} comments • {public_reactions_count} reactions</p>
+				<p className="flex-shrink-0 mt-3 text-sm md:mt-0">{comments_count} comments • {public_reactions_count} views</p>
 			</div>
 		</div>
 
@@ -40,23 +47,16 @@ const Blog = () => {
 		</svg>
 		<span>Author</span>
 	</Link>
-    
+    <div onClick={()=>handleBookmark(blog)} className="bg-secondary p-1 ml-5 rounded-full hover:bg-opacity-30 bg-opacity-20 cursor-pointer hover:scale-105">
+	<MdBookmarkAdd size={20} className="text-secondary"/>
+	</div>
 	
 </div>
 
          <Outlet/>
 		
 	</article>
-	<div>
-		<div className="flex flex-wrap py-6 gap-2 border-t border-dashed dark:border-gray-600">
-{tags.map(tag=><a key={tag} rel="noopener noreferrer" href="#" className="px-3 py-1 rounded-sm hover:underline dark:bg-violet-600 dark:text-gray-50">#{tag}</a>)}
-
-
-			
-			
-		</div>
-		
-	</div>
+	
 </div>
     );
 };
